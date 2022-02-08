@@ -2,13 +2,13 @@
     margin: 100px 150px;
     display: flex;
     align-items: center;
-    /* height: 350px; */
+    height: 350px;
     background-color: #f7f7f7;
   }
   
   .image-container {
     width: 50%;
-    height: 450px;
+    height: 350px;
     padding: 10px;
   }
   
