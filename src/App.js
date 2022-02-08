@@ -28,7 +28,7 @@ function App() {
 
   const getReading = async () => {
     const response = await axios.get("https://nada-english-api.herokuapp.com/api/admins/reading")
-
+////////////////////////
     setReadings(response.data)
   }
   const getListening = async () => {
