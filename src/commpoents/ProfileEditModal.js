@@ -45,14 +45,14 @@ function ProfileEditModal(props) {
               <Form.Control type="email" name="email" defaultValue={profiles.email} />
             </Col>
           </Form.Group>
-          <Form.Group as={Row} className="mb-3">
+          {/* <Form.Group as={Row} className="mb-3">
             <Form.Label column md="3">
               Avatar
             </Form.Label>
             <Col md="8">
               <Form.Control type="url" name="avatar" defaultValue={profiles.avatar} />
             </Col>
-          </Form.Group>
+          </Form.Group> */}
           {/* <Form.Group as={Row} className="mb-3">
             <Form.Label column md="3">
               Password

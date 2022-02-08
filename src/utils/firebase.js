@@ -1,16 +1,15 @@
-import firebase from "firebase"
-// import { initializeApp } from "firebase/app";
-// import {getStorage} from"firebase/storage"
-
+// import firebase from 'firebase'
+import * as firebase from "firebase/app";
 const firebaseConfig = {
-    apiKey: "AIzaSyAxoDRlj_-yhkrOQaiWUagWoN8mUIKQMF0",
-    authDomain: "fir-react-nada.firebaseapp.com",
-    projectId: "fir-react-nada",
-    storageBucket: "fir-react-nada.appspot.com",
-    messagingSenderId: "654793459699",
-    appId: "1:654793459699:web:f55667675f189d43277486"
-  };
-  firebase.initializeApp(firebaseConfig);
- export default firebase
-//   export const app = initializeApp(firebaseConfig)
-//   const storage = getStorage(a)
+  apiKey: "AIzaSyBQZpBG0VS5OPJbEiwySdQ5rUH40_gCKqw",
+  authDomain: "post-43284.firebaseapp.com",
+  projectId: "post-43284",
+  storageBucket: "post-43284.appspot.com",
+  messagingSenderId: "143489944961",
+  appId: "1:143489944961:web:4fd652ccb735ec5f922c80",
+  measurementId: "G-PTQNC90H83"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+export default firebase;

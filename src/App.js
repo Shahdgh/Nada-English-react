@@ -4,7 +4,6 @@ import axios from "axios"
 import { toast, ToastContainer } from "react-toastify"
 import Navbar from "./commpoents/Navbar"
 import "./App.css"
-import SectionOne from "./commpoents/SectionOne"
 import EnglishContext from "./utils/EnglishContext"
 import Login from "./pages/Login"
 import Home from "./pages/Home"
@@ -16,6 +15,8 @@ import Reading from "./pages/Reading"
 import Profile from "./pages/Profile"
 import Speaking from "./pages/Speaking"
 import firebase from "./utils/firebase"
+// import firebase from "./utils/firebase"
+
 
 function App() {
   const [listenings, setListenings] = useState([])
@@ -28,22 +29,22 @@ function App() {
   const navigate = useNavigate()
 
   const getReading = async () => {
-    const response = await axios.get("https://nada-english-api.herokuapp.com/api/admins/reading")
+    const response = await axios.get("http://localhost:5000/api/admins/reading")
 
     setReadings(response.data)
   }
   const getListening = async () => {
-    const response = await axios.get("https://nada-english-api.herokuapp.com/api/admins/listening")
+    const response = await axios.get("http://localhost:5000/api/admins/listening")
 
     setListenings(response.data)
   }
   const getSpeaking = async () => {
-    const response = await axios.get("https://nada-english-api.herokuapp.com/api/admins/speaking")
+    const response = await axios.get("http://localhost:5000/api/admins/speaking")
 
     setSpeakings(response.data)
   }
   const getWords = async () => {
-    const response = await axios.get("https://nada-english-api.herokuapp.com/api/admins/words")
+    const response = await axios.get("http://localhost:5000/api/admins/words")
 
     setWords(response.data)
   }
@@ -59,33 +60,33 @@ function App() {
   const signUser = async e => {
     e.preventDefault()
     try {
-      const image = from.elements.avatar.files[0]
-      let imageUrl 
-      if(image){
-        const imageRef = firebase
-        .storage()
-        .ref("images").child(`${image.lastModified}-${image.name}-${image.size}`);
-        await imageRef.put(image);
-        imageUrl = await imageRef.getDownloadURL();
-
-      }
       const form = e.target
+    //   const avatar = form.elements.avatar.files[0];
+    //   let imageUrl
+    //   if (avatar) {
+    //     const imageRef = await firebase.storage().ref("images").child(`${avatar.lastModified}-${avatar.name}-${avatar.size}`);
+    //      imageRef.put(avatar);
+    //     imageUrl = await imageRef.getDownloadURL();
+    // }
+     
       const userBody = {
         firstName: form.elements.firstName.value,
         lastName: form.elements.lastName.value,
         password: form.elements.password.value,
         email: form.elements.email.value,
-        avatar:imageUrl,
+        // avatar: imageUrl|| undefined,
         claass: form.elements.claass.value,
       }
-      await axios.post("https://nada-english-api.herokuapp.com/api/users/signup", userBody)
+      await  axios.post("http://localhost:5000/api/users/signup", userBody)
       toast.success("sign up success")
       navigate("/login")
+     
       // getProfile()
     } catch (error) {
-      console.log(error.response.data)
+      console.log(error?.response.data)
     }
   }
+  console.log("jghfgdsas")
   const loginUser = async e => {
     e.preventDefault()
     try {
@@ -94,7 +95,7 @@ function App() {
         email: form.elements.email.value,
         password: form.elements.password.value,
       }
-      const response = await axios.post(`https://nada-english-api.herokuapp.com/api/users/login`, userBody, {
+      const response = await axios.post(`http://localhost:5000/api/users/login`, userBody, {
         headers: {
           Authorization: localStorage.tokenUser,
         },
@@ -110,7 +111,7 @@ function App() {
   }
   const getProfiles = async () => {
     try {
-      const response = await axios.get(`https://nada-english-api.herokuapp.com/api/users/profile`, {
+      const response = await axios.get(`http://localhost:5000/api/users/profile`, {
         headers: {
           Authorization: localStorage.tokenUser,
         },
@@ -132,9 +133,9 @@ function App() {
         email: form.elements.email.value,
         claass: form.elements.claass.value,
         // password: form.elements.password.value,
-        avatar: form.elements.avatar.value,
+        // avatar: form.elements.avatar.value,
       }
-      await axios.put(`https://nada-english-api.herokuapp.com/api/users/profile/${userId}`, userBody, {
+      await axios.put(`http://localhost:5000/api/users/profile/${userId}`, userBody, {
         headers: {
           Authorization: localStorage.tokenUser,
         },
