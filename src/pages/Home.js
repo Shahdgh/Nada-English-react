@@ -9,7 +9,7 @@ function Home() {
         <>
         <SectionOne/>
         <SectionThree/>
-        <h2 style={{ textAlign: "center", fontWeight: "800", margin: "20px" }}>
+        <h2 style={{ textAlign: "center", fontWeight: "600", margin: "15px" }}>
         Apps and Channels That Help You Learn The Language
       </h2>
         <Row >
