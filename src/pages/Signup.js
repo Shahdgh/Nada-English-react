@@ -21,13 +21,13 @@ function Signup() {
                 <input type="lastName" className="login__input" name="lastName" placeholder="Last Name" />
               </div>
 
-              <div className="login__fielld">
-                <i className="login__icon "></i>
-                <input type="url" className="login__input" name="avatar" placeholder="Avatar" />
+              <div className="login__fielld ">
+                <i className="login__icon " ></i>
+                <input type="file" className="login__input"accept="image/jpeg, image/png" name="avatar" placeholder="image" />
               </div>
               <div className="login__fielld">
                 <i className="login__icon "></i>
-                <input type="text" className="login__input" name="claass" placeholder="Class" />
+                <input type="text" className="login__input"  name="claass" placeholder="Class" />
               </div>
               <div className="login__fielld">
                 <i className="login__icon "></i>

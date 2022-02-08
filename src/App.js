@@ -15,6 +15,7 @@ import About from "./pages/About"
 import Reading from "./pages/Reading"
 import Profile from "./pages/Profile"
 import Speaking from "./pages/Speaking"
+import firebase from "./utils/firebase"
 
 function App() {
   const [listenings, setListenings] = useState([])
@@ -58,13 +59,23 @@ function App() {
   const signUser = async e => {
     e.preventDefault()
     try {
+      const image = from.elements.avatar.files[0]
+      let imageUrl 
+      if(image){
+        const imageRef = firebase
+        .storage()
+        .ref("images").child(`${image.lastModified}-${image.name}-${image.size}`);
+        await imageRef.put(image);
+        imageUrl = await imageRef.getDownloadURL();
+
+      }
       const form = e.target
       const userBody = {
         firstName: form.elements.firstName.value,
         lastName: form.elements.lastName.value,
         password: form.elements.password.value,
         email: form.elements.email.value,
-        avatar: form.elements.avatar.value,
+        avatar:imageUrl,
         claass: form.elements.claass.value,
       }
       await axios.post("https://nada-english-api.herokuapp.com/api/users/signup", userBody)
