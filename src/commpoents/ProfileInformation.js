@@ -24,12 +24,12 @@ function ProfileInformation() {
             className="img-fluid"
             src="https://www.theheadteacher.com/uploads/article/CPD.jpg"
           />
-          {/* <Image
+          <Image
             style={{ marginTop: "-5rem", textAlign: "center", alignItems: "center", marginLeft: "35%" }}
             className=" border "
             width="150px"
             src={profiles.avatar}
-          /> */}
+          />
           <CDBCardBody className="d-flex flex-column align-items-center mb-4">
             <h2 style={{ fontSize: "20px", fontWeight: "800" }}>
               {profiles.firstName} {profiles.lastName}
@@ -40,9 +40,7 @@ function ProfileInformation() {
             <p style={{ fontSize: "15px", fontWeight: "800" }}>
               <MdEmail /> Emial : {profiles.email}
             </p>
-            {/* <p style={{ fontSize: "20px", fontWeight: "800" }}>
-              <BsFillPhoneFill /> Phone Number: {profileEmployees.phone}
-            </p> */}
+        
           
             <div>
               <CDBBtn

@@ -60,20 +60,20 @@ function App() {
     e.preventDefault()
     try {
       const form = e.target
-      //   const avatar = form.elements.avatar.files[0];
-      //   let imageUrl
-      //   if (avatar) {
-      //     const imageRef = await firebase.storage().ref("images").child(`${avatar.lastModified}-${avatar.name}-${avatar.size}`);
-      //      imageRef.put(avatar);
-      //     imageUrl = await imageRef.getDownloadURL();
-      // }
+      const avatar = form.elements.avatar.files[0]
+      let imageUrl
+      if (avatar) {
+        const imageRef = firebase.storage().ref("images").child(`${avatar.lastModified}-${avatar.name}-${avatar.size}`)
+        imageRef.put(avatar)
+        imageUrl = await imageRef.getDownloadURL()
+      }
 
       const userBody = {
         firstName: form.elements.firstName.value,
         lastName: form.elements.lastName.value,
         password: form.elements.password.value,
         email: form.elements.email.value,
-        // avatar: imageUrl|| undefined,
+        avatar: imageUrl || undefined,
         claass: form.elements.claass.value,
       }
       await axios.post("https://nada-english-api.herokuapp.com/api/users/signup", userBody)
@@ -126,6 +126,13 @@ function App() {
     e.preventDefault()
     try {
       const form = e.target
+      //   const avatar = form.elements.avatar.files[0];
+      //   let imageUrl
+      //   if (avatar) {
+      //     const imageRef =  firebase.storage().ref("images").child(`${avatar.lastModified}-${avatar.name}-${avatar.size}`);
+      //      imageRef.put(avatar);
+      //     imageUrl = await imageRef.getDownloadURL();
+      // }
       const userBody = {
         firstName: form.elements.firstName.value,
         lastName: form.elements.lastName.value,

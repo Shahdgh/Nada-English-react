@@ -50,7 +50,7 @@ function ProfileEditModal(props) {
               Avatar
             </Form.Label>
             <Col md="8">
-              <Form.Control type="url" name="avatar" defaultValue={profiles.avatar} />
+              <Form.Control type="file" name="avatar" accept="image/jpg,image/png"   />
             </Col>
           </Form.Group> */}
           {/* <Form.Group as={Row} className="mb-3">
