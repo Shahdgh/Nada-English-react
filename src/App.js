@@ -21,63 +21,60 @@ function App() {
   const [readings, setReadings] = useState([])
   const [speakings, setSpeakings] = useState([])
 
-
   const [words, setWords] = useState([])
   const [profiles, setProfiles] = useState({})
 
-  
   const navigate = useNavigate()
 
   const getReading = async () => {
-    const response = await axios.get("http://localhost:5000/api/admins/reading")
+    const response = await axios.get("https://nada-english-api.herokuapp.comapi/admins/reading")
 
     setReadings(response.data)
   }
   const getListening = async () => {
-    const response = await axios.get("http://localhost:5000/api/admins/listening")
+    const response = await axios.get("https://nada-english-api.herokuapp.comapi/admins/listening")
 
     setListenings(response.data)
   }
   const getSpeaking = async () => {
-    const response = await axios.get("http://localhost:5000/api/admins/speaking")
+    const response = await axios.get("https://nada-english-api.herokuapp.comapi/admins/speaking")
 
     setSpeakings(response.data)
   }
   const getWords = async () => {
-    const response = await axios.get("http://localhost:5000/api/admins/words")
+    const response = await axios.get("https://nada-english-api.herokuapp.comapi/admins/words")
 
     setWords(response.data)
   }
-  useEffect(() =>{
+  useEffect(() => {
     getListening()
     getSpeaking()
     getReading()
     getWords()
     getProfiles()
-  },[])
-  
+  }, [])
 
-    ///Sign Up user
-    const signUser = async e => {
-      e.preventDefault()
-      try {
-        const form = e.target
-        const userBody = {
-          firstName: form.elements.firstName.value,
-          lastName: form.elements.lastName.value,
-          password: form.elements.password.value,
-          email: form.elements.email.value,
-          avatar: form.elements.avatar.value,
-          claass: form.elements.claass.value,
-        }
-        await axios.post("http://localhost:5000/api/users/signup", userBody)
-        toast.success("sign up success")
-        navigate("/login")
-        // getProfile()
-      } catch (error) {
-        console.log(error.response.data)
+  ///Sign Up user
+  const signUser = async e => {
+    e.preventDefault()
+    try {
+      const form = e.target
+      const userBody = {
+        firstName: form.elements.firstName.value,
+        lastName: form.elements.lastName.value,
+        password: form.elements.password.value,
+        email: form.elements.email.value,
+        avatar: form.elements.avatar.value,
+        claass: form.elements.claass.value,
       }
+      await axios.post("https://nada-english-api.herokuapp.comapi/users/signup", userBody)
+      toast.success("sign up success")
+      navigate("/login")
+      // getProfile()
+    } catch (error) {
+      console.log(error.response.data)
     }
+  }
   const loginUser = async e => {
     e.preventDefault()
     try {
@@ -86,7 +83,7 @@ function App() {
         email: form.elements.email.value,
         password: form.elements.password.value,
       }
-      const response = await axios.post(`http://localhost:5000/api/users/login`, userBody, {
+      const response = await axios.post(`https://nada-english-api.herokuapp.comapi/users/login`, userBody, {
         headers: {
           Authorization: localStorage.tokenUser,
         },
@@ -100,9 +97,9 @@ function App() {
       else console.log(error)
     }
   }
-  const getProfiles= async () => {
+  const getProfiles = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/users/profile`, {
+      const response = await axios.get(`https://nada-english-api.herokuapp.comapi/users/profile`, {
         headers: {
           Authorization: localStorage.tokenUser,
         },
@@ -113,7 +110,7 @@ function App() {
       console.log(error.response.data)
     }
   }
-  
+
   const editProfile = async (e, userId) => {
     e.preventDefault()
     try {
@@ -126,7 +123,7 @@ function App() {
         // password: form.elements.password.value,
         avatar: form.elements.avatar.value,
       }
-      await axios.put(`http://localhost:5000/api/users/profile/${userId}`, userBody, {
+      await axios.put(`https://nada-english-api.herokuapp.comapi/users/profile/${userId}`, userBody, {
         headers: {
           Authorization: localStorage.tokenUser,
         },
@@ -138,8 +135,8 @@ function App() {
       else console.log(error)
     }
   }
-   /////////logout///////////
-   const logout = () => {
+  /////////logout///////////
+  const logout = () => {
     localStorage.removeItem("tokenUser")
 
     navigate("/")
@@ -154,16 +151,15 @@ function App() {
     profiles,
     editProfile,
     speakings,
-    
   }
   return (
     <>
       <EnglishContext.Provider value={store}>
         <ToastContainer />
-        <Navbar/>
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-        
+
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/listening" element={<Listening />} />
@@ -173,15 +169,10 @@ function App() {
           <Route path="/aboutme" element={<About />} />
           <Route path="/profile" element={<Profile />} />
 
-
-          
-
-
           {/* <Route path="/employee-login" element={<EmployeeLogin />} />
           <Route path="/companion-login" element={<SignLogin />} />
           <Route path="/dietitian-login" element={<DietitianLogin />} />
           <Route path="/patient-login" element={<PatientLogin />} /> */}
-
         </Routes>
       </EnglishContext.Provider>
     </>
