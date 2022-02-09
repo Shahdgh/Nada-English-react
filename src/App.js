@@ -82,10 +82,11 @@ function App() {
 
       // getProfile()
     } catch (error) {
-      console.log(error?.response.data)
+      if (error.response) toast.error(error.response.data)
+      else console.log(error)
     }
   }
-  console.log("jghfgdsas")
+  
   const loginUser = async e => {
     e.preventDefault()
     try {
