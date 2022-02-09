@@ -80,9 +80,9 @@ function App() {
       toast.success("sign up success")
       navigate("/login")
 
-      getProfiles()
+      // getProfiles()
     } catch (error) {
-      if (error.response) toast.error("alrady register")
+      if (error.response)  console.log(error.response.data)
       else console.log(error)
     }
   }
