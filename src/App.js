@@ -76,17 +76,22 @@ function App() {
         avatar: imageUrl || undefined,
         claass: form.elements.claass.value,
       }
-    await axios.post("https://nada-english-api.herokuapp.com/api/users/signup", userBody)
+      const response = await axios.post("https://nada-english-api.herokuapp.com/api/users/signup", userBody, {
+        headers: {
+          Authorization: localStorage.tokenUser,
+        },
+      })
+      localStorage.tokenUser = response.data
       toast.success("sign up success")
       navigate("/login")
 
       // getProfiles()
     } catch (error) {
-      if (error.response)  console.log(error.response.data)
+      if (error.response) toast.error(error.response.data)
       else console.log(error)
     }
   }
-  
+
   const loginUser = async e => {
     e.preventDefault()
     try {
