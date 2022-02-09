@@ -82,7 +82,7 @@ function App() {
 
       getProfiles()
     } catch (error) {
-      if (error.response) toast.error(error.response)
+      if (error.response) toast.error("alrady register")
       else console.log(error)
     }
   }
