@@ -76,13 +76,13 @@ function App() {
         avatar: imageUrl || undefined,
         claass: form.elements.claass.value,
       }
-      await axios.post("https://nada-english-api.herokuapp.com/api/users/signup", userBody)
+    await axios.post("https://nada-english-api.herokuapp.com/api/users/signup", userBody)
       toast.success("sign up success")
       navigate("/login")
 
-      // getProfile()
+      getProfiles()
     } catch (error) {
-      if (error.response) toast.error(error.response.data)
+      if (error.response) toast.error(error.response)
       else console.log(error)
     }
   }
