@@ -29,27 +29,27 @@ function App() {
   const navigate = useNavigate()
 
   const getReading = async () => {
-    const response = await axios.get("https://nada-english-api.herokuapp.com/admins/reading")
+    const response = await axios.get("https://nada-english-api.herokuapp.com/api/admins/reading")
 
     setReadings(response.data)
   }
   const getListening = async () => {
-    const response = await axios.get("https://nada-english-api.herokuapp.com/admins/listening")
+    const response = await axios.get("https://nada-english-api.herokuapp.com/api/admins/listening")
 
     setListenings(response.data)
   }
   const getSpeaking = async () => {
-    const response = await axios.get("https://nada-english-api.herokuapp.com/admins/speaking")
+    const response = await axios.get("https://nada-english-api.herokuapp.com/api/admins/speaking")
 
     setSpeakings(response.data)
   }
   const getWords = async () => {
-    const response = await axios.get("https://nada-english-api.herokuapp.com/admins/words")
+    const response = await axios.get("https://nada-english-api.herokuapp.com/api/admins/words")
 
     setWords(response.data)
   }
   const getGenres = async () => {
-    const response = await axios.get("https://nada-english-api.herokuapp.com/geners")
+    const response = await axios.get("https://nada-english-api.herokuapp.com/api/geners")
 
     setGenres(response.data)
   }
@@ -83,7 +83,7 @@ function App() {
         avatar: imageUrl || undefined,
         claass: form.elements.claass.value,
       }
-      const response = await axios.post("https://nada-english-api.herokuapp.com/users/signup", userBody, {
+      const response = await axios.post("https://nada-english-api.herokuapp.com/api/users/signup", userBody, {
         headers: {
           Authorization: localStorage.tokenUser,
         },
@@ -107,7 +107,7 @@ function App() {
         email: form.elements.email.value,
         password: form.elements.password.value,
       }
-      const response = await axios.post(`https://nada-english-api.herokuapp.com/users/login`, userBody, {
+      const response = await axios.post(`https://nada-english-api.herokuapp.com/api/users/login`, userBody, {
         headers: {
           Authorization: localStorage.tokenUser,
         },
@@ -123,7 +123,7 @@ function App() {
   }
   const getProfiles = async () => {
     try {
-      const response = await axios.get(`https://nada-english-api.herokuapp.com/users/profile`, {
+      const response = await axios.get(`https://nada-english-api.herokuapp.com/api/users/profile`, {
         headers: {
           Authorization: localStorage.tokenUser,
         },
@@ -154,7 +154,7 @@ function App() {
         // password: form.elements.password.value,
         // avatar: form.elements.avatar.value,
       }
-      await axios.put(`https://nada-english-api.herokuapp.com/users/profile/${userId}`, userBody, {
+      await axios.put(`https://nada-english-api.herokuapp.com/api/users/profile/${userId}`, userBody, {
         headers: {
           Authorization: localStorage.tokenUser,
         },
@@ -169,7 +169,7 @@ function App() {
 
   const likeSpeaking = async speakingId => {
     try {
-      const response = await axios.get(`https://nada-english-api.herokuapp.com/users/${speakingId}/likes`, {
+      const response = await axios.get(`https://nada-english-api.herokuapp.com/api/users/${speakingId}/likes`, {
         headers: {
           Authorization: localStorage.tokenUser,
         },
@@ -185,7 +185,7 @@ function App() {
   }
   const likeListening = async listeningId => {
     try {
-      const response = await axios.get(`https://nada-english-api.herokuapp.com/users/${listeningId}/listening/likes`, {
+      const response = await axios.get(`https://nada-english-api.herokuapp.com/api/users/${listeningId}/listening/likes`, {
         headers: {
           Authorization: localStorage.tokenUser,
         },
@@ -200,7 +200,7 @@ function App() {
   }
   const likeReading = async readingId => {
     try {
-      const response = await axios.get(`https://nada-english-api.herokuapp.com/users/${readingId}/reading/likes`, {
+      const response = await axios.get(`https://nada-english-api.herokuapp.com/api/users/${readingId}/reading/likes`, {
         headers: {
           Authorization: localStorage.tokenUser,
         },
@@ -215,7 +215,7 @@ function App() {
   }
   const likeWord = async wordId => {
     try {
-      const response = await axios.get(`https://nada-english-api.herokuapp.com/users/${wordId}/word/likes`, {
+      const response = await axios.get(`https://nada-english-api.herokuapp.com/api/users/${wordId}/word/likes`, {
         headers: {
           Authorization: localStorage.tokenUser,
         },
