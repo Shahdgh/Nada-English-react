@@ -1,16 +1,25 @@
 import { useContext } from "react"
-import { Card, Col, Row } from "react-bootstrap"
+import { Card, Col,Button } from "react-bootstrap"
 import ReactPlayer from "react-player"
 import EnglishContext from "../utils/EnglishContext"
+import { MdFavorite,MdOutlineFavoriteBorder} from "react-icons/md";
 
 function VideoListening(props) {
   const { listening } = props
+  const {likeListening,profiles,}=useContext(EnglishContext)
+
+
+
+  const liked = listening.likess.includes(profiles._id)
   return (
     <>
       <Col>
         <Card style={{ disply: "flex", flexDirection: "row", marginBottom: "10px", justifyContent: "space-around",marginLeft:"8px",marginRight:"8px"  }}>
           <ReactPlayer controls url={listening.video} />
         </Card>
+        <Button style={{  marginBottom: "5px",backgroundColor:"rgb(45, 9, 61)",color:"white" }} variant="" className="ms-3" onClick={() => likeListening(listening._id)}>
+                {liked ? <MdFavorite /> : <MdOutlineFavoriteBorder />}
+              </Button>
       </Col>
     </>
   )

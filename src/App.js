@@ -15,41 +15,48 @@ import Reading from "./pages/Reading"
 import Profile from "./pages/Profile"
 import Speaking from "./pages/Speaking"
 import firebase from "./utils/firebase"
+import MyFiavorat from "./pages/MyFiavorat"
 // import firebase from "./utils/firebase"
 
 function App() {
   const [listenings, setListenings] = useState([])
   const [readings, setReadings] = useState([])
   const [speakings, setSpeakings] = useState([])
-
+const [genres,setGenres] = useState([])
   const [words, setWords] = useState([])
   const [profiles, setProfiles] = useState({})
 
   const navigate = useNavigate()
 
   const getReading = async () => {
-    const response = await axios.get("https://nada-english-api.herokuapp.com/api/admins/reading")
+    const response = await axios.get("http://localhost:5000/api/admins/reading")
 
     setReadings(response.data)
   }
   const getListening = async () => {
-    const response = await axios.get("https://nada-english-api.herokuapp.com/api/admins/listening")
+    const response = await axios.get("http://localhost:5000/api/admins/listening")
 
     setListenings(response.data)
   }
   const getSpeaking = async () => {
-    const response = await axios.get("https://nada-english-api.herokuapp.com/api/admins/speaking")
+    const response = await axios.get("http://localhost:5000/api/admins/speaking")
 
     setSpeakings(response.data)
   }
   const getWords = async () => {
-    const response = await axios.get("https://nada-english-api.herokuapp.com/api/admins/words")
+    const response = await axios.get("http://localhost:5000/api/admins/words")
 
     setWords(response.data)
+  }
+  const getGenres = async () => {
+    const response = await axios.get("http://localhost:5000/api/geners")
+
+    setGenres(response.data)
   }
   useEffect(() => {
     getListening()
     getSpeaking()
+    getGenres()
     getReading()
     getWords()
     getProfiles()
@@ -76,7 +83,7 @@ function App() {
         avatar: imageUrl || undefined,
         claass: form.elements.claass.value,
       }
-      const response = await axios.post("https://nada-english-api.herokuapp.com/api/users/signup", userBody, {
+      const response = await axios.post("http://localhost:5000/api/users/signup", userBody, {
         headers: {
           Authorization: localStorage.tokenUser,
         },
@@ -100,7 +107,7 @@ function App() {
         email: form.elements.email.value,
         password: form.elements.password.value,
       }
-      const response = await axios.post(`https://nada-english-api.herokuapp.com/api/users/login`, userBody, {
+      const response = await axios.post(`http://localhost:5000/api/users/login`, userBody, {
         headers: {
           Authorization: localStorage.tokenUser,
         },
@@ -116,7 +123,7 @@ function App() {
   }
   const getProfiles = async () => {
     try {
-      const response = await axios.get(`https://nada-english-api.herokuapp.com/api/users/profile`, {
+      const response = await axios.get(`http://localhost:5000/api/users/profile`, {
         headers: {
           Authorization: localStorage.tokenUser,
         },
@@ -147,7 +154,7 @@ function App() {
         // password: form.elements.password.value,
         // avatar: form.elements.avatar.value,
       }
-      await axios.put(`https://nada-english-api.herokuapp.com/api/users/profile/${userId}`, userBody, {
+      await axios.put(`http://localhost:5000/api/users/profile/${userId}`, userBody, {
         headers: {
           Authorization: localStorage.tokenUser,
         },
@@ -159,6 +166,69 @@ function App() {
       else console.log(error)
     }
   }
+
+  const likeSpeaking = async speakingId => {
+    try {
+      const response = await axios.get(`http://localhost:5000/api/users/${speakingId}/likes`, {
+        headers: {
+          Authorization: localStorage.tokenUser,
+        },
+      })
+      getProfiles()
+      getSpeaking()
+    
+      toast.success(response.data)
+    } catch (error) {
+      if (error.response) toast.error(error.response.data)
+      else console.log(error)
+    }
+  }
+  const likeListening = async listeningId => {
+    try {
+      const response = await axios.get(`http://localhost:5000/api/users/${listeningId}/listening/likes`, {
+        headers: {
+          Authorization: localStorage.tokenUser,
+        },
+      })
+      getProfiles()
+      getListening()
+      toast.success(response.data)
+    } catch (error) {
+      if (error.response) toast.error(error.response.data)
+      else console.log(error)
+    }
+  }
+  const likeReading = async readingId => {
+    try {
+      const response = await axios.get(`http://localhost:5000/api/users/${readingId}/reading/likes`, {
+        headers: {
+          Authorization: localStorage.tokenUser,
+        },
+      })
+      getReading()
+      getProfiles()
+      toast.success(response.data)
+    } catch (error) {
+      if (error.response) toast.error(error.response.data)
+      else console.log(error)
+    }
+  }
+  const likeWord = async wordId => {
+    try {
+      const response = await axios.get(`http://localhost:5000/api/users/${wordId}/word/likes`, {
+        headers: {
+          Authorization: localStorage.tokenUser,
+        },
+      })
+      getWords()
+      getProfiles()
+      toast.success(response.data)
+    } catch (error) {
+      if (error.response) toast.error(error.response.data)
+      else console.log(error)
+    }
+  }
+  
   /////////logout///////////
   const logout = () => {
     localStorage.removeItem("tokenUser")
@@ -167,14 +237,20 @@ function App() {
   }
   const store = {
     listenings,
+    likeListening,
+
     readings,
+    likeReading,
     words,
+    likeWord,
     loginUser,
     signUser,
     logout,
     profiles,
     editProfile,
     speakings,
+    likeSpeaking,
+    genres,
   }
   return (
     <>
@@ -192,6 +268,8 @@ function App() {
           <Route path="/words" element={<Words />} />
           <Route path="/aboutme" element={<About />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/myfav" element={<MyFiavorat />} />
+
 
           {/* <Route path="/employee-login" element={<EmployeeLogin />} />
           <Route path="/companion-login" element={<SignLogin />} />

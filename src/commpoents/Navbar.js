@@ -35,6 +35,7 @@ function NavbarItem () {
         ):null}
         {localStorage.tokenUser ? (
          <Nav className="ms-auto">
+         <Nav.Link ><Link style={{ fontSize: "15px", color: "white", textDecoration: "none",fontWeight:"600" }} to="/myfav">My Favourite </Link></Nav.Link>  
          <Nav.Link ><Link style={{ fontSize: "15px", color: "white", textDecoration: "none",fontWeight:"600" }} to="/profile">Profile <MdAssignmentInd/></Link></Nav.Link>  
          <Nav.Link ><Link style={{ fontSize: "15px", color: "white", textDecoration: "none",marginLeft:"5px",fontWeight:"600" }} to="/"onClick={logout} >Logout <GoSignOut/></Link></Nav.Link>
           </Nav>
