@@ -22,34 +22,34 @@ function App() {
   const [listenings, setListenings] = useState([])
   const [readings, setReadings] = useState([])
   const [speakings, setSpeakings] = useState([])
-const [genres,setGenres] = useState([])
+  const [genres, setGenres] = useState([])
   const [words, setWords] = useState([])
   const [profiles, setProfiles] = useState({})
 
   const navigate = useNavigate()
 
   const getReading = async () => {
-    const response = await axios.get("http://localhost:5000/api/admins/reading")
+    const response = await axios.get("https://nada-english-api.herokuapp.com/admins/reading")
 
     setReadings(response.data)
   }
   const getListening = async () => {
-    const response = await axios.get("http://localhost:5000/api/admins/listening")
+    const response = await axios.get("https://nada-english-api.herokuapp.com/admins/listening")
 
     setListenings(response.data)
   }
   const getSpeaking = async () => {
-    const response = await axios.get("http://localhost:5000/api/admins/speaking")
+    const response = await axios.get("https://nada-english-api.herokuapp.com/admins/speaking")
 
     setSpeakings(response.data)
   }
   const getWords = async () => {
-    const response = await axios.get("http://localhost:5000/api/admins/words")
+    const response = await axios.get("https://nada-english-api.herokuapp.com/admins/words")
 
     setWords(response.data)
   }
   const getGenres = async () => {
-    const response = await axios.get("http://localhost:5000/api/geners")
+    const response = await axios.get("https://nada-english-api.herokuapp.com/geners")
 
     setGenres(response.data)
   }
@@ -83,7 +83,7 @@ const [genres,setGenres] = useState([])
         avatar: imageUrl || undefined,
         claass: form.elements.claass.value,
       }
-      const response = await axios.post("http://localhost:5000/api/users/signup", userBody, {
+      const response = await axios.post("https://nada-english-api.herokuapp.com/users/signup", userBody, {
         headers: {
           Authorization: localStorage.tokenUser,
         },
@@ -107,7 +107,7 @@ const [genres,setGenres] = useState([])
         email: form.elements.email.value,
         password: form.elements.password.value,
       }
-      const response = await axios.post(`http://localhost:5000/api/users/login`, userBody, {
+      const response = await axios.post(`https://nada-english-api.herokuapp.com/users/login`, userBody, {
         headers: {
           Authorization: localStorage.tokenUser,
         },
@@ -123,7 +123,7 @@ const [genres,setGenres] = useState([])
   }
   const getProfiles = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/users/profile`, {
+      const response = await axios.get(`https://nada-english-api.herokuapp.com/users/profile`, {
         headers: {
           Authorization: localStorage.tokenUser,
         },
@@ -154,7 +154,7 @@ const [genres,setGenres] = useState([])
         // password: form.elements.password.value,
         // avatar: form.elements.avatar.value,
       }
-      await axios.put(`http://localhost:5000/api/users/profile/${userId}`, userBody, {
+      await axios.put(`https://nada-english-api.herokuapp.com/users/profile/${userId}`, userBody, {
         headers: {
           Authorization: localStorage.tokenUser,
         },
@@ -169,14 +169,14 @@ const [genres,setGenres] = useState([])
 
   const likeSpeaking = async speakingId => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/users/${speakingId}/likes`, {
+      const response = await axios.get(`https://nada-english-api.herokuapp.com/users/${speakingId}/likes`, {
         headers: {
           Authorization: localStorage.tokenUser,
         },
       })
       getProfiles()
       getSpeaking()
-    
+
       toast.success(response.data)
     } catch (error) {
       if (error.response) toast.error(error.response.data)
@@ -185,7 +185,7 @@ const [genres,setGenres] = useState([])
   }
   const likeListening = async listeningId => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/users/${listeningId}/listening/likes`, {
+      const response = await axios.get(`https://nada-english-api.herokuapp.com/users/${listeningId}/listening/likes`, {
         headers: {
           Authorization: localStorage.tokenUser,
         },
@@ -200,7 +200,7 @@ const [genres,setGenres] = useState([])
   }
   const likeReading = async readingId => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/users/${readingId}/reading/likes`, {
+      const response = await axios.get(`https://nada-english-api.herokuapp.com/users/${readingId}/reading/likes`, {
         headers: {
           Authorization: localStorage.tokenUser,
         },
@@ -215,7 +215,7 @@ const [genres,setGenres] = useState([])
   }
   const likeWord = async wordId => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/users/${wordId}/word/likes`, {
+      const response = await axios.get(`https://nada-english-api.herokuapp.com/users/${wordId}/word/likes`, {
         headers: {
           Authorization: localStorage.tokenUser,
         },
@@ -228,7 +228,7 @@ const [genres,setGenres] = useState([])
       else console.log(error)
     }
   }
-  
+
   /////////logout///////////
   const logout = () => {
     localStorage.removeItem("tokenUser")
@@ -269,7 +269,6 @@ const [genres,setGenres] = useState([])
           <Route path="/aboutme" element={<About />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/myfav" element={<MyFiavorat />} />
-
 
           {/* <Route path="/employee-login" element={<EmployeeLogin />} />
           <Route path="/companion-login" element={<SignLogin />} />
