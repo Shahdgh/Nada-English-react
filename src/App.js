@@ -185,11 +185,14 @@ function App() {
   }
   const likeListening = async listeningId => {
     try {
-      const response = await axios.get(`https://nada-english-api.herokuapp.com/api/users/${listeningId}/listening/likes`, {
-        headers: {
-          Authorization: localStorage.tokenUser,
-        },
-      })
+      const response = await axios.get(
+        `https://nada-english-api.herokuapp.com/api/users/${listeningId}/listening/likes`,
+        {
+          headers: {
+            Authorization: localStorage.tokenUser,
+          },
+        }
+      )
       getProfiles()
       getListening()
       toast.success(response.data)
