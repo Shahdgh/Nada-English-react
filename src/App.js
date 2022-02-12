@@ -91,7 +91,7 @@ function App() {
 
       toast.success("تم انشاء المستخدم و ارسال رسالة تحقق الى الأيميل")
 
-      // getProfiles()
+      getProfiles()
     } catch (error) {
       if (error.response) toast.error(error.response.data)
       else console.log(error)
@@ -106,7 +106,7 @@ function App() {
         email: form.elements.email.value,
         password: form.elements.password.value,
       }
-      const response = await axios.post(`https://nada-english-api.herokuapp.com/api/users/login`, userBody, {
+      const response = await axios.post(`https://nada-english.herokuapp.com/api/users/login`, userBody, {
         headers: {
           Authorization: localStorage.tokenUser,
         },
