@@ -16,6 +16,7 @@ import Profile from "./pages/Profile"
 import Speaking from "./pages/Speaking"
 import firebase from "./utils/firebase"
 import MyFiavorat from "./pages/MyFiavorat"
+import Emailverified from "./pages/Emailverified"
 // import firebase from "./utils/firebase"
 
 function App() {
@@ -83,14 +84,12 @@ function App() {
         avatar: imageUrl || undefined,
         claass: form.elements.claass.value,
       }
-      const response = await axios.post("https://nada-english-api.herokuapp.com/api/users/signup", userBody, {
-        headers: {
-          Authorization: localStorage.tokenUser,
-        },
-      })
-      localStorage.tokenUser = response.data
-      toast.success("sign up success")
-      navigate("/login")
+
+      await axios.post("https://nada-english-api.herokuapp.com/api/users/signup", userBody)
+      // localStorage.tokenUser = response.data
+      // toast.success("sign up success")
+
+      toast.success("تم انشاء المستخدم و ارسال رسالة تحقق الى الأيميل")
 
       // getProfiles()
     } catch (error) {
@@ -272,11 +271,7 @@ function App() {
           <Route path="/aboutme" element={<About />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/myfav" element={<MyFiavorat />} />
-
-          {/* <Route path="/employee-login" element={<EmployeeLogin />} />
-          <Route path="/companion-login" element={<SignLogin />} />
-          <Route path="/dietitian-login" element={<DietitianLogin />} />
-          <Route path="/patient-login" element={<PatientLogin />} /> */}
+          <Route path="/email_verified/:token" element={<Emailverified />} />
         </Routes>
       </EnglishContext.Provider>
     </>
