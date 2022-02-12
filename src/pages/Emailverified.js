@@ -12,7 +12,6 @@ function Emailverified() {
       //   const  response=
       await axios.get(`https://nada-english-api.herokuapp.com/api/users/verify_email/${token}`)
       toast.success("تم التحقق من الأيميل")
-      // toast.success(response.data)
 
       navigate("/login")
     } catch (error) {
