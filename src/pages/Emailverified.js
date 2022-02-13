@@ -20,6 +20,7 @@ function Emailverified() {
       setError(true)
     }
   }
+  ///////////////
   useEffect(() => {
     verifyEmailToken()
   }, [])
